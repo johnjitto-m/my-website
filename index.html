@@ -1,88 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Trader Surprise!</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #121212;
-      color: #ffffff;
-      text-align: center;
-      transition: background 0.5s, color 0.5s;
-    }
-
-    h1 {
-      margin-top: 50px;
-      font-size: 3rem;
-      color: #00ff95;
-    }
-
-    #profit {
-      font-size: 2rem;
-      margin: 20px 0;
-      color: #ffd700;
-    }
-
-    button {
-      padding: 10px 20px;
-      font-size: 1rem;
-      margin: 10px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    #surpriseBtn {
-      background-color: #007bff;
-      color: white;
-    }
-
-    #themeBtn {
-      background-color: #00ff95;
-      color: #121212;
-    }
-
-    .light-mode {
-      background-color: #ffffff;
-      color: #000000;
-    }
-
-    .light-mode h1 {
-      color: #007bff;
-    }
-
-    .light-mode #profit {
-      color: #ff4500;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <title>Trader Surprise</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>Hey Trader!</h1>
-  <p id="profit">Live Profit: ₹0</p>
+  <button id="helloBtn">Hello</button>
+  <p id="message"></p>
 
-  <button id="surpriseBtn">Click for a Surprise 🎉</button>
-  <button id="themeBtn">Toggle Trader Mode</button>
-
-  <script>
-    // Simulate live profit counter
-    let profit = 0;
-    setInterval(() => {
-      profit += Math.floor(Math.random() * 500);
-      document.getElementById('profit').innerText = `Live Profit: ₹${profit.toLocaleString()}`;
-    }, 1000);
-
-    // Surprise popup
-    document.getElementById('surpriseBtn').onclick = () => {
-      alert("🔥 Boom! ₹10,000 profit in 10 mins!\nGo grab your coffee, trader!");
-    };
-
-    // Toggle light/dark theme
-    document.getElementById('themeBtn').onclick = () => {
-      document.body.classList.toggle("light-mode");
-    };
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
