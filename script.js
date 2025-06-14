@@ -1,42 +1,39 @@
 const form = document.getElementById("tradeForm");
-const journalBody = document.getElementById("journalBody");
+const input = document.getElementById("tradeInput");
+const list = document.getElementById("tradeList");
 
-let trades = JSON.parse(localStorage.getItem("trades")) || [];
-
-function renderTrades() {
-  journalBody.innerHTML = "";
-  trades.forEach((trade) => {
-    const row = document.createElement("tr");
-    const pl = ((trade.exit - trade.entry) * trade.qty).toFixed(2);
-    row.innerHTML = `
-      <td>${trade.date}</td>
-      <td>${trade.symbol}</td>
-      <td>${trade.entry}</td>
-      <td>${trade.exit}</td>
-      <td>${trade.qty}</td>
-      <td>${pl}</td>
-      <td>${trade.note}</td>
-    `;
-    journalBody.appendChild(row);
-  });
-}
-
-form.addEventListener("submit", (e) => {
+form.addEventListener("submit", function (e) {
   e.preventDefault();
-
-  const trade = {
-    date: document.getElementById("date").value,
-    symbol: document.getElementById("symbol").value.toUpperCase(),
-    entry: parseFloat(document.getElementById("entry").value),
-    exit: parseFloat(document.getElementById("exit").value),
-    qty: parseInt(document.getElementById("qty").value),
-    note: document.getElementById("note").value,
-  };
-
-  trades.push(trade);
-  localStorage.setItem("trades", JSON.stringify(trades));
-  renderTrades();
-  form.reset();
+  const value = input.value.trim();
+  if (value !== "") {
+    addTrade(value);
+    input.value = "";
+  }
 });
 
-renderTrades();
+function addTrade(text) {
+  const li = document.createElement("li");
+
+  const span = document.createElement("span");
+  span.textContent = text;
+
+  const editBtn = document.createElement("button");
+  editBtn.textContent = "Edit";
+  editBtn.onclick = function () {
+    const newText = prompt("Edit your trade:", span.textContent);
+    if (newText !== null && newText.trim() !== "") {
+      span.textContent = newText.trim();
+    }
+  };
+
+  const deleteBtn = document.createElement("button");
+  deleteBtn.textContent = "Delete";
+  deleteBtn.onclick = function () {
+    li.remove();
+  };
+
+  li.appendChild(span);
+  li.appendChild(editBtn);
+  li.appendChild(deleteBtn);
+  list.appendChild(li);
+}
